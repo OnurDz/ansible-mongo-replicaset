@@ -30,6 +30,10 @@
       state: restarted
     become: yes
 
+  - name: Waiting for 5 secs
+    pause:
+      seconds: 5
+
   - name: Initializing one node replica set
     mongodb_replicaset:
       login_host: localhost
