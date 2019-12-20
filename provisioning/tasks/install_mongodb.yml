@@ -20,9 +20,11 @@
     apt:
       name: mongodb-org
       state: present
-      update_cache: yes
 
   - name: Starting MongoDB service
     service:
       name: mongod
       state: started
+
+  handlers:
+  - import_tasks: ../handlers/main.yml

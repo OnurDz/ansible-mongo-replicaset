@@ -1,29 +1,29 @@
 - name: pip playbook
   hosts: all
   gather_facts: no
+  become: yes
 
   tasks:
   - name: Updating apt cache
     apt:
       update_cache: yes
-    become: yes
 
   - name: Changing default py version from python2 to python3
     shell: update-alternatives --install /usr/bin/python python {{ item }}
     with_items:
     - /usr/bin/python2.7 1
     - /usr/bin/python3.6 2
-    become: yes
 
   - name: Installing pip3 from Ubuntu repo
     apt:
       name: python3-pip
       state: present
-    become: yes
 
   - name: Installing dependencies
     pip:
       name:
       - pymongo
       executable: pip3
-    become: yes
+
+  handlers:
+  - import_tasks: ../handlers/main.yml
