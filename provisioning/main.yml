@@ -1,0 +1,20 @@
+- name: Set up MongoDB and create single node replica set.
+  hosts: all
+  gather_facts: no
+
+  tasks:
+  - name: Running pip3 setup
+    import_tasks: tasks/setup_pip.yml
+    become: yes
+  
+  - name: Running MongoDB setup
+    import_tasks: tasks/install_mongodb.yml
+    become: yes
+  
+  - name: Running database configuration
+    import_tasks: tasks/config_db.yml
+    become: yes
+  
+  - name: Running replica set configuration
+    import_tasks: tasks/replica_set.yml
+  

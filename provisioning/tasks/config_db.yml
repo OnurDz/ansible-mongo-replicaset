@@ -1,27 +1,27 @@
-- name: Database configuration playbook
-  gather_facts: no
-  hosts: all
-  become: yes
-  
-  tasks:
-  - name: Creating database directory '/data/db'
-    file:
-      path: /data/db
-      state: directory
-  
-  - name: Generating configuration files
-    copy:
-      src: ../files/mongod.conf-replset.tmp
-      dest: /etc/mongod.conf
-      owner: root
-      group: root
-      mode: '0644'
+- name: Creating database directory '/data/db'
+  file:
+    path: /data/db
+    state: directory
 
-  - name: Removing possible locks
-    file:
-      path: /var/lib/mongodb/mongod.lock
-      state: absent
-    notify: restart mongodb
+- name: Generating configuration files
+  copy:
+    src: ../files/mongod.conf-replset.tmp
+    dest: /etc/mongod.conf
+    owner: root
+    group: root
+    mode: '0644'
 
-  handlers:
-  - import_tasks: ../handlers/main.yml
+- name: Restarting MongoDB service
+  service:
+    name: mongod
+    state: restarted
+
+- name: Removing possible locks
+  file:
+    path: /var/lib/mongodb/mongod.lock
+    state: absent
+
+- name: Restarting MongoDB service
+  service:
+    name: mongod
+    state: restarted

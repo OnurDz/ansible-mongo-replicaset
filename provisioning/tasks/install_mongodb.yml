@@ -1,30 +1,25 @@
-- name: MongoDB download and install playbook
-  hosts: all
-  gather_facts: no
+
+- name: Importing MongoDB public key from Ubuntu key server
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: 4B7C549A058F8B6B
   become: yes
 
-  tasks:
-  - name: Importing MongoDB public key from Ubuntu key server
-    apt_key:
-      keyserver: hkp://keyserver.ubuntu.com:80
-      id: 4B7C549A058F8B6B
+- name: Adding MongoDB repo to sources.list.d
+  apt_repository:
+    repo: deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse
+    state: present
+    filename: mongodb-org-4.2
+    update_cache: yes
+  become: yes
 
-  - name: Adding MongoDB repo to sources.list.d
-    apt_repository:
-      repo: deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse
-      state: present
-      filename: mongodb-org-4.2
-      update_cache: yes
+- name: Installing MongoDB using apt
+  apt:
+    name: mongodb-org
+    state: present
+  become: yes
 
-  - name: Installing MongoDB using apt
-    apt:
-      name: mongodb-org
-      state: present
-
-  - name: Starting MongoDB service
-    service:
-      name: mongod
-      state: started
-
-  handlers:
-  - import_tasks: ../handlers/main.yml
+- name: Starting MongoDB service
+  service:
+    name: mongod
+    state: started
