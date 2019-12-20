@@ -4,17 +4,17 @@
 
   tasks:
   - name: Running pip3 setup
-    import_tasks: tasks/setup_pip.yml
+    import_tasks: setup_pip.yml
     become: yes
   
   - name: Running MongoDB setup
-    import_tasks: tasks/install_mongodb.yml
+    import_tasks: install_mongodb.yml
     become: yes
   
   - name: Running database configuration
-    import_tasks: tasks/config_db.yml
+    import_tasks: config_db.yml
     become: yes
   
   - name: Running replica set configuration
-    import_tasks: tasks/replica_set.yml
+    import_tasks: replica_set.yml
   
