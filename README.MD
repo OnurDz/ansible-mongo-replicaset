@@ -1,0 +1,1 @@
+This repository contains Ansible Playbooks and some configuration files to provision a fresh Ubuntu Bionic Vagrant virtual machine for the purpose of installing and setting up MongoDB and initializing a single node replica set.
