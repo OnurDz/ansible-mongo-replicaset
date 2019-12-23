@@ -14,6 +14,13 @@
   pip:
     name:
     - pymongo
-    - python-apt
     executable: pip
+  become: yes
+  
+- name: Installing dependencies
+  apt:
+    name:
+    - python-apt
+    state: present
+    update_cache: yes
   become: yes
