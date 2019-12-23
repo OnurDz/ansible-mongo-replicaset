@@ -22,5 +22,5 @@
 - name: Starting MongoDB service
   service:
     name: mongod
-    state: started
+    state: restarted
   become: yes

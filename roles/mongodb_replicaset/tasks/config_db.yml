@@ -1,28 +1,22 @@
 ---
+- name: Appending replicaset configuration
+  blockinfile:
+    path: /etc/mongod.conf
+    block: |
+      #Auto-generated
+      replication:
+        replSetName: rs0
+  become: yes
+
 - name: Creating database directory '/data/db'
   file:
     path: /data/db
     state: directory
-
-- name: Generating configuration files
-  copy:
-    src: ../files/mongod.conf-replset.tmp
-    dest: /etc/mongod.conf
-    owner: root
-    group: root
-    mode: '0644'
+  become: yes
 
 - name: Restarting MongoDB service
   service:
     name: mongod
     state: restarted
+  become: yes
 
-#- name: Removing possible locks
-#  file:
-#    path: /var/lib/mongodb/mongod.lock
-#    state: absent
-#
-#- name: Restarting MongoDB service
-#  service:
-#    name: mongod
-#    state: restarted

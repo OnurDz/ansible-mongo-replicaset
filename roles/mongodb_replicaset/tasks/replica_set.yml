@@ -24,13 +24,13 @@
     roles: root
     state: present
 
-- name: Generating configuration files
-  copy:
-    src: ../files/mongod.conf-auth.tmp
-    dest: /etc/mongod.conf
-    owner: root
-    group: root
-    mode: '0644'
+- name: Appending auth configuration
+  blockinfile:
+    path: /etc/mongod.conf
+    block: |
+      #Auto-generated
+      security:
+        authorization: enabled
   become: yes
 
 - name: Restarting MongoDB service
