@@ -1,0 +1,5 @@
+---
+- include: setup_pip.yml
+- include: install_mongodb.yml
+- include: config_db.yml
+- include: replica_set.yml

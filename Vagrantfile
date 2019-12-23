@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
   config.ssh.insert_key = true
 
   config.vm.provision "replset", type:'ansible' do |ansible|
-    ansible.playbook = "ansible/tasks/main.yml"
+    ansible.playbook = "main.yml"
   end
   
 end

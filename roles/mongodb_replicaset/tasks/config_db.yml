@@ -1,3 +1,4 @@
+---
 - name: Creating database directory '/data/db'
   file:
     path: /data/db
@@ -16,12 +17,12 @@
     name: mongod
     state: restarted
 
-- name: Removing possible locks
-  file:
-    path: /var/lib/mongodb/mongod.lock
-    state: absent
-
-- name: Restarting MongoDB service
-  service:
-    name: mongod
-    state: restarted
+#- name: Removing possible locks
+#  file:
+#    path: /var/lib/mongodb/mongod.lock
+#    state: absent
+#
+#- name: Restarting MongoDB service
+#  service:
+#    name: mongod
+#    state: restarted

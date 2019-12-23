@@ -1,3 +1,4 @@
+---
 - name: Initializing one node replica set
   mongodb_replicaset:
     login_host: localhost
