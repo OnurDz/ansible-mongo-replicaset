@@ -14,5 +14,6 @@
   pip:
     name:
     - pymongo
+    - python-apt
     executable: pip
   become: yes

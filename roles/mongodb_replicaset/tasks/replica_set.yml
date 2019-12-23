@@ -1,4 +1,11 @@
 ---
+- name: Disable db authorization to init replset
+  lineinfile:
+    path: '{{ mongodb_confpath }}'
+    regexp: '^authorization: enabled'
+    state: absent
+  become: yes
+
 - name: Initializing one node replica set
   mongodb_replicaset:
     login_host: localhost
@@ -17,18 +24,20 @@
 
 - name: Creating admin user
   mongodb_user:
-    database: admin
-    name: admin
-    password: nimda
+    database: '{{ admin_db }}'
+    name: '{{ admin_name }}'
+    password: '{{ admin_pw }}'
     replica_set: rs0
     roles: root
     state: present
 
 - name: Appending auth configuration
   blockinfile:
-    path: /etc/mongod.conf
+    path: '{{ mongodb_confpath }}'
     block: |
-      #Auto-generated
+      replication:
+        replSetName: rs0
+
       security:
         authorization: enabled
   become: yes
@@ -45,11 +54,11 @@
 
 - name: Create user 'milvus'
   mongodb_user:
-    login_database: admin
-    login_user: admin
-    login_password: nimda
-    database: trac
-    name: milvus
-    password: suvlim
+    login_database: '{{ admin_db }}'
+    login_user: '{{ admin_name }}'
+    login_password: '{{ admin_pw }}'
+    database: '{{ user_db }}'
+    name: '{{ user_name }}'
+    password: '{{ user_pw }}'
     roles: readWrite
     state: present

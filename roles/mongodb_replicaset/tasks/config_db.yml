@@ -1,16 +1,15 @@
 ---
 - name: Appending replicaset configuration
   blockinfile:
-    path: /etc/mongod.conf
+    path: '{{ mongodb_confpath }}'
     block: |
-      #Auto-generated
       replication:
         replSetName: rs0
   become: yes
 
-- name: Creating database directory '/data/db'
+- name: Creating database directory
   file:
-    path: /data/db
+    path: '{{ db_directory }}'
     state: directory
   become: yes
 
@@ -20,3 +19,7 @@
     state: restarted
   become: yes
 
+- name: Updating apt cache
+  apt:
+    update_cache: yes
+  become: yes

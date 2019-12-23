@@ -1,0 +1,7 @@
+# Vars for db user config
+admin_name: admin
+admin_pw: nimda
+admin_db: admin
+user_name: milvus
+user_pw: suvlim
+user_db: trac

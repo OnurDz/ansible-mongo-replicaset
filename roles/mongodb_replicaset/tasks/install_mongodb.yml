@@ -2,12 +2,12 @@
 - name: Importing MongoDB public key from Ubuntu key server
   apt_key:
     keyserver: hkp://keyserver.ubuntu.com:80
-    id: 4B7C549A058F8B6B
+    id: '{{ mongodb_aptkey }}'
   become: yes
 
 - name: Adding MongoDB repo to sources.list.d
   apt_repository:
-    repo: deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse
+    repo: '{{ mongodb_repository }}'
     state: present
     filename: mongodb-org-4.2
     update_cache: yes
@@ -15,7 +15,7 @@
 
 - name: Installing MongoDB using apt
   apt:
-    name: mongodb-org
+    name: '{{ mongodb_packagename }}'
     state: present
   become: yes
 
