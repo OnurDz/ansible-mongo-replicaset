@@ -9,7 +9,7 @@
 
 - name: Creating database directory
   file:
-    path: '{{ db_directory }}'
+    path: '{{ mongodb_directory }}'
     state: directory
   become: yes
 

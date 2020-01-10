@@ -24,9 +24,9 @@
 
 - name: Creating admin user
   mongodb_user:
-    database: '{{ admin_db }}'
-    name: '{{ admin_name }}'
-    password: '{{ admin_pw }}'
+    database: '{{ mongodb_replicaset_admin_db }}'
+    name: '{{ mongodb_replicaset_admin_name }}'
+    password: '{{ mongodb_replicaset_admin_pw }}'
     replica_set: rs0
     roles: root
     state: present
@@ -54,11 +54,11 @@
 
 - name: Create user 'milvus'
   mongodb_user:
-    login_database: '{{ admin_db }}'
-    login_user: '{{ admin_name }}'
-    login_password: '{{ admin_pw }}'
-    database: '{{ user_db }}'
-    name: '{{ user_name }}'
-    password: '{{ user_pw }}'
+    login_database: '{{ mongodb_replicaset_admin_db }}'
+    login_user: '{{ mongodb_replicaset_admin_name }}'
+    login_password: '{{ mongodb_replicaset_admin_pw }}'
+    database: '{{ mongodb_replicaset_user_db }}'
+    name: '{{ mongodb_replicaset_user_name }}'
+    password: '{{ mongodb_replicaset_user_pw }}'
     roles: readWrite
     state: present

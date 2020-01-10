@@ -1,7 +1,7 @@
 # Vars for db user config
-admin_name: admin
-admin_pw: nimda
-admin_db: admin
-user_name: milvus
-user_pw: suvlim
-user_db: trac
+mongodb_replicaset_admin_name: admin
+mongodb_replicaset_admin_pw: nimda
+mongodb_replicaset_admin_db: admin
+mongodb_replicaset_user_name: milvus
+mongodb_replicaset_user_pw: suvlim
+mongodb_replicaset_user_db: trac
